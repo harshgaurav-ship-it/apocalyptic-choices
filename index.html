@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07101b" />
+    <title>Mumbai: Afterlight - Chapter 1 Build 0.1</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="game" class="game title-mode shot-wide" aria-live="polite">
+      <div class="sky"></div>
+      <div class="city city-far"></div>
+      <div class="city city-near"></div>
+      <div class="rain" id="rain" aria-hidden="true"></div>
+      <div class="vignette"></div>
+      <div class="flash" id="flash"></div>
+
+      <header class="hud">
+        <div class="chapter" id="chapter">EPISODE 1 · THE LAST TRAIN</div>
+        <button class="quiet-button" id="settingsButton" aria-expanded="false">OPTIONS</button>
+      </header>
+      <div class="save-toast hidden" id="saveToast">CHECKPOINT SAVED</div>
+
+      <section class="settings-panel hidden" id="settingsPanel" aria-label="Options">
+        <p>ACCESSIBILITY</p>
+        <label class="switch-row">Choice timer <button id="timerToggle" class="toggle" aria-pressed="true">ON</button></label>
+        <label class="switch-row">Ambient sound <button id="soundToggle" class="toggle" aria-pressed="false">OFF</button></label>
+        <label class="switch-row">Voice preview <button id="voiceToggle" class="toggle" aria-pressed="false">OFF</button></label>
+        <button id="restartButton" class="small-action">Restart scene</button>
+      </section>
+
+      <section class="station" aria-hidden="true">
+        <div class="roof">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="sign"><b id="stationTitle">DADAR</b><small id="stationSubtitle">PLATFORM 3 · LAST LOCAL</small></div>
+        <div class="platform-light light-a"></div>
+        <div class="platform-light light-b"></div>
+        <div class="train">
+          <div class="train-roof"></div>
+          <div class="train-body">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="train-stripe"></div>
+        </div>
+        <div class="platform-edge"></div>
+        <div class="water"></div>
+        <div class="debris d1"></div><div class="debris d2"></div><div class="debris d3"></div>
+      </section>
+      <section class="underpass" aria-hidden="true">
+        <div class="underpass-ceiling"><i></i><i></i><i></i></div>
+        <div class="underpass-wall"><span>WARD 3</span><b>NO SIGNAL</b></div>
+        <div class="underpass-lamp"></div>
+        <div class="underpass-taxi"><div class="taxi-light"></div><div class="taxi-window"></div></div>
+        <div class="underpass-road"></div>
+      </section>
+      <section class="dispensary" aria-hidden="true">
+        <div class="dispensary-wall"><span>DADAR COMMUNITY DISPENSARY</span><b>EMERGENCY<br>TRIAGE</b></div>
+        <div class="dispensary-shelf"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="dispensary-cabinet"><div class="cabinet-cross">+</div></div>
+        <div class="dispensary-lamp"></div>
+        <div class="dispensary-curtain"></div>
+        <div class="dispensary-floor"></div>
+      </section>
+      <section class="signal-room" aria-hidden="true">
+        <div class="signal-skyline"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="signal-roofline"></div>
+        <div class="signal-tower"><div class="tower-light"></div><div class="tower-rings"></div></div>
+        <div class="signal-console"><span>EMERGENCY BAND 91.4</span><b>..._ _ _...</b><small>INCOMING / UNVERIFIED</small></div>
+        <div class="signal-rainwater"></div>
+      </section>
+      <section class="service-gate" aria-hidden="true">
+        <div class="gate-wall"><span>DADAR SERVICE ANNEX · EAST ACCESS</span><b>KEEP<br>OUT</b></div>
+        <div class="gate-frame"><div class="gate-bars"></div><div class="gate-padlock">×</div><div class="gate-light"></div></div>
+        <div class="gate-puddle"></div>
+        <div class="gate-shadow"></div>
+      </section>
+
+      <section class="characters" aria-hidden="true">
+        <div class="character harsh expression-neutral" id="harsh" data-name="Harsh">
+          <div class="character-shadow"></div>
+          <div class="body"><div class="hood"></div><div class="strap"></div></div>
+          <div class="neck"></div>
+          <div class="head"><div class="hair"></div><div class="brow brow-left"></div><div class="brow brow-right"></div><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="nose"></div><div class="mouth"></div></div>
+        </div>
+        <div class="character kavya expression-worried" id="kavya" data-name="Kavya">
+          <div class="character-shadow"></div>
+          <div class="body"><div class="scarf"></div><div class="bag"></div></div>
+          <div class="neck"></div>
+          <div class="head"><div class="hair"></div><div class="brow brow-left"></div><div class="brow brow-right"></div><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="nose"></div><div class="mouth"></div></div>
+        </div>
+        <div class="character leela expression-panicked hidden" id="leela" data-name="Leela">
+          <div class="character-shadow"></div>
+          <div class="body"><div class="shawl"></div></div>
+          <div class="neck"></div>
+          <div class="head"><div class="hair"></div><div class="brow brow-left"></div><div class="brow brow-right"></div><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="nose"></div><div class="mouth"></div></div>
+        </div>
+        <div class="character kabir expression-neutral hidden" id="kabir" data-name="Kabir">
+          <div class="character-shadow"></div>
+          <div class="body"><div class="jacket-stripe"></div><div class="strap"></div></div>
+          <div class="neck"></div>
+          <div class="head"><div class="hair"></div><div class="brow brow-left"></div><div class="brow brow-right"></div><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="nose"></div><div class="mouth"></div></div>
+        </div>
+        <div class="character zoya expression-neutral hidden" id="zoya" data-name="Zoya">
+          <div class="character-shadow"></div>
+          <div class="body"><div class="coat"></div><div class="stethoscope"></div></div>
+          <div class="neck"></div>
+          <div class="head"><div class="hair"></div><div class="brow brow-left"></div><div class="brow brow-right"></div><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="nose"></div><div class="mouth"></div></div>
+        </div>
+        <div class="character raghav expression-neutral hidden" id="raghav" data-name="Raghav">
+          <div class="character-shadow"></div>
+          <div class="body"><div class="reflective-vest"></div><div class="radio"></div></div>
+          <div class="neck"></div>
+          <div class="head"><div class="hair"></div><div class="brow brow-left"></div><div class="brow brow-right"></div><div class="eye eye-left"></div><div class="eye eye-right"></div><div class="nose"></div><div class="mouth"></div></div>
+        </div>
+      </section>
+
+      <section class="title-card" id="titleCard">
+        <p class="eyebrow">EPISODE 1 OF 5 · AN ORIGINAL CINEMATIC CHOICE DRAMA</p>
+        <h1>MUMBAI<br><em>AFTERLIGHT</em></h1>
+        <p class="title-copy">CHAPTER 1 · THE LAST TRAIN<br>The last local stopped. The rain did not.</p>
+        <button id="startButton" class="primary-button">BEGIN THE LAST LOCAL <span>→</span></button>
+        <button id="resumeButton" class="secondary-button hidden">CONTINUE CHECKPOINT <span>↳</span></button>
+        <p class="hint">Mouse / touch / Space to advance · Your first choice is remembered.</p>
+      </section>
+
+      <section class="dialogue-shell hidden" id="dialogueShell">
+        <div class="speaker-name" id="speakerName">HARSH</div>
+        <button class="dialogue-box" id="advanceButton" aria-label="Advance dialogue">
+          <span id="dialogueText"></span><span class="advance-mark" id="advanceMark">◆</span>
+        </button>
+      </section>
+
+      <section class="choice-shell hidden" id="choiceShell" aria-label="Make a choice">
+        <div class="choice-heading"><span id="choicePrompt">WHAT DO YOU DO?</span><span id="timerReadout">30</span></div>
+        <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+        <div class="choice-grid" id="choiceGrid"></div>
+      </section>
+
+      <section class="explore-shell hidden" id="exploreShell" aria-label="Search the ticket hall">
+        <div class="explore-topline">
+          <div><span class="explore-kicker">TICKET HALL · SEARCH</span><h2>FIND A WAY OUT</h2></div>
+          <div class="objective" id="exploreObjective">INSPECT 0 / 2 CLUES</div>
+        </div>
+        <div class="ticket-hall" aria-label="Interactive ticket hall">
+          <div class="hall-windows"><i></i><i></i><i></i><i></i></div>
+          <div class="hall-clock">08:52</div>
+          <button class="hotspot hotspot-map" data-clue="map"><span>1</span>EVACUATION MAP</button>
+          <button class="hotspot hotspot-locker" data-clue="locker"><span>2</span>STAFF LOCKER</button>
+          <button class="hotspot hotspot-phone" data-clue="phone"><span>3</span>RINGING PHONE</button>
+          <div class="hall-flood"></div>
+        </div>
+        <div class="explore-bottom">
+          <p id="exploreLog">Rain needles through the broken roof. Something is still ringing near the gates.</p>
+          <div class="found-items" id="foundItems" aria-label="Found items"></div>
+          <button id="exitHallButton" class="primary-button" disabled>LEAVE THE TICKET HALL <span>→</span></button>
+        </div>
+      </section>
+
+      <section class="loadout-shell hidden" id="loadoutShell" aria-label="Choose an item for the East Exit">
+        <div class="loadout-copy">
+          <p class="eyebrow">EAST EXIT · 9:01 PM</p>
+          <h2>ONE ITEM.<br><em>ONE WAY THROUGH.</em></h2>
+          <p id="loadoutText">The shutter shakes in its rails. Water is already climbing the steps.</p>
+        </div>
+        <div class="exit-frame" aria-hidden="true"><div class="shutter-slats"></div><div class="exit-water"></div><div class="exit-light"></div></div>
+        <div class="loadout-panel">
+          <div class="loadout-heading"><span>CHOOSE WHAT HARSH USES</span><span id="loadoutTimer">30</span></div>
+          <div class="timer-track"><div class="timer-fill" id="loadoutTimerFill"></div></div>
+          <div class="loadout-grid" id="loadoutGrid"></div>
+        </div>
+      </section>
+
+      <section class="route-shell hidden" id="routeShell" aria-label="Choose the group's night route">
+        <div class="route-title"><p class="eyebrow">NO SIGNAL · 10:04 PM</p><h2>DRAW A LINE<br><em>THROUGH THE CITY.</em></h2><p id="routeIntro">The first route is never safe. It only decides what kind of danger finds you first.</p></div>
+        <div class="route-board" aria-hidden="true">
+          <div class="map-grid"></div>
+          <div class="map-label label-dadar">DADAR</div><div class="map-label label-mahim">MAHIM</div><div class="map-label label-sion">SION</div>
+          <div class="route-line line-market"></div><div class="route-line line-drain"></div><div class="route-line line-bridge"></div>
+          <div class="map-pin pin-start">×</div><div class="map-pin pin-end">+</div>
+        </div>
+        <div class="route-panel">
+          <div class="loadout-heading"><span>CHOOSE THE NIGHT ROUTE</span><span id="routeTimer">30</span></div>
+          <div class="timer-track"><div class="timer-fill" id="routeTimerFill"></div></div>
+          <div class="route-grid">
+            <button class="route-choice" data-route="market"><span>1</span><strong>MARKET STREET</strong><small>People, food, and nowhere to hide.</small></button>
+            <button class="route-choice" data-route="drain"><span>2</span><strong>STORM DRAIN</strong><small>Quiet water. Tight spaces. Fewer eyes.</small></button>
+            <button class="route-choice" data-route="bridge"><span>3</span><strong>THE FLYOVER</strong><small>Fast enough to matter. Visible enough to hurt.</small></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="recap-shell hidden" id="recapShell" aria-label="First-night choice recap">
+        <p class="eyebrow">EPISODE 1 · ACT I COMPLETE</p>
+        <h2>THE CITY<br><em>REMEMBERS.</em></h2>
+        <p id="recapLead">Every choice has taken something, given something, or left a door open.</p>
+        <div class="recap-grid" id="recapGrid"></div>
+        <p class="recap-note">THE LAST TRAIN CONTINUES IN ACT II. THIS BUILD PRESERVES EVERY FIRST-NIGHT CONSEQUENCE.</p>
+        <button id="recapTitleButton" class="primary-button">RETURN TO EPISODE MENU <span>↻</span></button>
+      </section>
+
+      <section class="result-card hidden" id="resultCard">
+        <p class="eyebrow" id="resultKicker">CHOICE REMEMBERED</p>
+        <h2 id="resultTitle">TOGETHER, FOR NOW</h2>
+        <p id="resultText"></p>
+        <div class="memory-list" id="memoryList"></div>
+        <button id="continueButton" class="primary-button">CONTINUE TO THE FOOTBRIDGE <span>→</span></button>
+        <button id="replayButton" class="secondary-button">PLAY ANOTHER PATH <span>↻</span></button>
+        <button id="clearSaveButton" class="clear-button hidden">CLEAR CHECKPOINT</button>
+      </section>
+
+      <footer class="footer-note">ZERO-DEPENDENCY BROWSER BUILD · ORIGINAL STORY &amp; ART · NO EXTERNAL ASSETS</footer>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>

@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Local secrets and generated development files
+.env
+.env.*
+node_modules/
+assets/audio/source/
